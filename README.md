@@ -1,5 +1,8 @@
-### KHUTHON 2024
-# FastAPI Server
+# KHUTHON 2024
+### 주제: 
+
+*
+## FastAPI Server
 
 > 1. /app: 애플리케이션의 주요 코드를 포함합니다.
 > 2. /api: API 엔드포인트를 정의합니다. /router 폴더를 사용할 수 있습니다.
