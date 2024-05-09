@@ -1,0 +1,78 @@
+#database.py
+engine = create_engine(
+    "mysql+pymysql://{username}:{password}@{host}:{port}/{name}".format(
+        username=settings.DB_USERNAME,
+        password=settings.DB_PASSWORD,
+        host=settings.DB_HOST,
+        port=settings.DB_PORT,
+        name=settings.DB_TEST_NAME if settings.TESTING else settings.DB_NAME,
+    )
+)
+
+SessionLocal = sessionmaker(
+    bind=engine,
+    autocommit=False,
+    autoflush=False,
+)
+
+Base = declarative_base()
+
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
+#config.py
+from pydantic_settings import BaseSettings
+from typing import ClassVar
+from functools import lru_cache
+
+
+class BaseConfig(BaseSettings):
+    # DB
+    DB_USERNAME: str
+    DB_HOST: str
+    DB_PASSWORD: str
+    DB_PORT: int
+
+    # Test Config
+    TESTING: ClassVar[bool] = False
+
+    class Config:
+        extra = "ignore"
+        env_file = ".env"
+        env_file_encoding = "utf-8"
+
+
+class testSettings(BaseConfig):
+    TESTING: ClassVar[bool] = True
+    DB_TEST_NAME: str
+
+
+class Settings(BaseConfig):
+    TESTING: ClassVar[bool] = False
+    DB_NAME: str
+
+
+class isMain(BaseSettings):
+    IS_MAIN: bool
+
+    class Config:
+        extra = "ignore"
+        env_file = ".env"
+        env_file_encoding = "utf-8"
+
+
+@lru_cache
+def get_settings():
+    if is_main.IS_MAIN:
+        return Settings()
+    else:
+        return testSettings()
+
+
+is_main = isMain()
+settings = get_settings()
