@@ -24,7 +24,6 @@ async def crawl_coupang(item_name):
     options.add_experimental_option("prefs", {"prfile.managed_default_content_setting.images": 2})
 
     url = "https://www.coupang.com/np/search?component=&q="+urllib.parse.quote(item_name)+"&channel=user"
-    print(url)
 
     driver = webdriver.Chrome()
     driver.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {"source": """ Object.defineProperty(navigator, 'webdriver', { get: () => undefined }) """})
@@ -34,7 +33,6 @@ async def crawl_coupang(item_name):
 
     first_product = driver.find_element(By.XPATH, '//ul[@id="productList"]/li[2]').find_element(By.TAG_NAME, "a")
 
-    print(first_product.get_attribute("href"))
     driver.get(first_product.get_attribute("href"))
     time.sleep(2)
 
@@ -73,7 +71,7 @@ async def analyze_sentiment(text):
     """
     주어진 텍스트에서 키워드들의 연관관계와 긍정/부정 정도를 분석합니다.
     """
-    message = f"GOAL: read the PRODUCT_INFO and figure out if the product is environmentally certified and related to ESG\n\nPRODUCT_INFO: ```{text}```. \n Find as much evidence as possible for environment. \n1. Make all words in PRODUCT_INFO flow naturally while understanding the overall context of the text.\n2. Check all the words that is related to environment, society, and governance.\n3. Check if there are words which is in list of [```{eco_keywords}```] Return Yes the if the word is in the list and No if not.\n4. Return the ESG evidence that you found in the PRODUCT_INFO\n\nRETURN FORMAT:\nCertified:\n- Yes or No\n\n```\n\nESG:\n\n- Evidence 1 \n\n- Evidence 2\n\n- Evidence 3```"
+    message = f"GOAL: read the PRODUCT_INFO and figure out if the product is environmentally certified and related to ESG\n\nPRODUCT_INFO: ```{text}```. \n Find as much evidence as possible for environment. \n1. Make all words in PRODUCT_INFO flow naturally while understanding the overall context of the text.\n2. Check all the words that is related to environment, society, and governance.\n3. Check if there are words which is in list of [```{eco_keywords}```] Return Yes the if the word is in the list and No if not.\n4. Return the ESG evidence that you found in the PRODUCT_INFO\n\nRETURN FORMAT:\n5. You must return text in korean\nCertified:\n- Yes or No\n\n```\n\nESG:\n\n- Evidence 1 \n\n- Evidence 2\n\n- Evidence 3```"
     # OpenAI Sentiment Analysis 수행
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
