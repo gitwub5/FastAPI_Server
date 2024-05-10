@@ -21,9 +21,9 @@ Backend: URL "[https://github.com/cherrie-k/khuthon](https://github.com/gitwub5/
 > 1. /app: 애플리케이션의 주요 코드를 포함합니다.
 > 2. /api: API 엔드포인트를 정의합니다. /router 폴더를 사용할 수 있습니다.
 > 3. /core: 애플리케이션 설정과 같은 핵심 구성요소를 포함합니다.
->>models: dto를 설정 및 관리합니다.
->>schemas: Pydantic을 사용하여 요청과 응답 스키마를 정의합니다.
->>database: SQlite Database를 설정합니다.
+>> models: dto를 설정 및 관리합니다.
+>> schemas: Pydantic을 사용하여 요청과 응답 스키마를 정의합니다.
+>> database: SQlite Database를 설정합니다.
 > 4. /service: 서비스와 AI 관련 코드를 포함합니다. 모델 로드, 로직 실행 등의 기능을 정의합니다.
 > 5. main.py: FastAPI 애플리케이션을 생성하고 구성하는 메인 파일입니다.
 > 6. /tests: 단위 테스트 및 통합 테스트를 위한 폴더입니다.
