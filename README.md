@@ -3,7 +3,6 @@ KHUTHON 2024
 서비스명: HOWGREEN
 -------------
 ![KakaoTalk_Photo_2024-05-11-05-06-34-2](https://github.com/gitwub5/FastAPI_Server/assets/132264450/93828431-a71e-4758-9ba5-b6f4b47faa23)
-![KakaoTalk_Photo_2024-05-11-05-06-34-1](https://github.com/gitwub5/FastAPI_Server/assets/132264450/f222ab03-f345-4e0d-b1ab-633135ecb621)
 ![KakaoTalk_Photo_2024-05-11-05-06-34-3](https://github.com/gitwub5/FastAPI_Server/assets/132264450/47c44780-95a6-4922-b72e-23443eaf2f3d)
 
 ### 서비스 설명: 그린워싱 방법이 교모해져가는 사회에서 녹색 소비, 즉 친환경 소비를 지향하는 소비자를 위한 정보 전달 어플리케이션
