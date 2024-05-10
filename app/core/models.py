@@ -21,10 +21,25 @@ class Result(Base):
     environment = Column(String, nullable=True)
     social = Column(String, nullable=True)
     governce = Column(String, nullable=True)
+    certified = Column(Boolean)
     result = Column(String)
+    product = Column(String)
+    company = Column(String)
+    articles = relationship("Article", back_populates="result")
+    esgs = relationship("Esg", back_populates="result")
 
 class Article(Base):
     __tablename__="article"
     id = Column(Integer, primary_key=True)
     url = Column(Text)
     result_id = Column(Integer, ForeignKey("result.id"))
+    result = relationship("Result", back_populates="articles")
+
+
+class Esg(Base):
+    __tablename__="esg"
+    id = Column(Integer, primary_key=True)
+    keyword = Column(String)
+    context = Column(Text)
+    result_id = Column(Integer, ForeignKey("result.id"))
+    result = relationship("Result", back_populates="esgs")
