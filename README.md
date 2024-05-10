@@ -2,7 +2,7 @@ KHUTHON 2024
 =============
 서비스명: HOWGREEN
 -------------
-<img src="[/path/to/img.jpg](https://github.com/gitwub5/FastAPI_Server/assets/132264450/93828431-a71e-4758-9ba5-b6f4b47faa23)" width="450px" height="300px"></img><br/>
+<img src="https://github.com/gitwub5/FastAPI_Server/assets/132264450/93828431-a71e-4758-9ba5-b6f4b47faa23" width="450px" height="300px"></img><br/>
 
 ![KakaoTalk_Photo_2024-05-11-05-06-34-2](https://github.com/gitwub5/FastAPI_Server/assets/132264450/93828431-a71e-4758-9ba5-b6f4b47faa23)
 ![KakaoTalk_Photo_2024-05-11-05-10-29](https://github.com/gitwub5/FastAPI_Server/assets/132264450/69c032ea-43ec-4a6a-9efb-93523820608e)
