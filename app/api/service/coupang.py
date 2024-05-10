@@ -2,7 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import WebDriverWait
-# from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support import expected_conditions as EC
 import time
 from . import OCR
@@ -25,7 +25,10 @@ async def crawl_coupang(item_name):
 
     url = "https://www.coupang.com/np/search?component=&q="+urllib.parse.quote(item_name)+"&channel=user"
 
-    driver = webdriver.Chrome()
+    options = webdriver.ChromeOptions()
+    options.add_argument("--headless")  # 브라우저를 표시하지 않고 실행
+    options.add_argument("--disable-gpu")  # GPU 사용 안 함
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
     driver.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {"source": """ Object.defineProperty(navigator, 'webdriver', { get: () => undefined }) """})
     driver.implicitly_wait(2)
     driver.get(url)
