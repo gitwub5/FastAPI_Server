@@ -1,3 +1,8 @@
 .env
 /venv
 mysql
+app/__pycache__
+myenv
+app/api/__pycache__
+app/api/service/__pycache__
+app/core/__pycache__
