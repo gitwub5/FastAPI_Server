@@ -58,7 +58,7 @@ async def create_article(db: Session,result_id: int, urls: List[str], titles: Li
         db.commit()
         db.refresh(db_result)
         db_results.append(db_result)
-    return db_result  
+    return db_results
 
 
 async def create_esg_info(db: Session, result_id: int, esg_info: List[str]):

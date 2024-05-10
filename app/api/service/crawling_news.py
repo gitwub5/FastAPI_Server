@@ -128,6 +128,9 @@ async def get_positive_keywords(reply_list):
         # 쉼표로 구분하여 리스트로 변환
         keywords_list = [re.sub(r"[^\uAC00-\uD7A30-9a-zA-Z\s]", "", keyword.strip()) for keyword in content_between.split(',')]
         positive_keywords += keywords_list
+
+    if len(positive_keywords) > 3:
+        return positive_keywords[:3]
     
     return positive_keywords
 

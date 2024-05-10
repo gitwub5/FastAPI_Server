@@ -69,7 +69,7 @@ async def crawl_coupang(item_name):
 
 async def analyze_sentiment(text):
     client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
-    eco_keywords = ['친환경인증', '환경인증', '환경표지인증', '녹색건축', '친환경 농산물 인증', '무농약인증']
+    eco_keywords = ['친환경인증', '환경인증', '환경표지인증', '녹색건축', '친환경 농산물 인증', '무농약인증', '무항생제인증', '무항생제 인증', '유기가공식품인증', '유기가공식품 인증', '식품안전관리인증']
 
     """
     주어진 텍스트에서 키워드들의 연관관계와 긍정/부정 정도를 분석합니다.
