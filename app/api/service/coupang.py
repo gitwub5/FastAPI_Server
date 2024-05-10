@@ -46,15 +46,21 @@ async def crawl_coupang(item_name):
 
     ## 이미지를 찾아온다
     images = driver.find_elements(By.TAG_NAME, "img")
+    detail_image = ""
+    try:
+        detail_image = driver.find_element(By.XPATH, '//*[@id="repImageContainer"]/img').get_attribute("src")
+    except:
+        print("EXCEPTION")
 
     image_data = []
     for image in images:
         ## 이미지의 주소를 뽑아온다
+
         src = image.get_attribute("src")
         ## 이미지가 없는 경우 예외처리
         if(src != None):
             ## 이미지의 확장자가 jpeg, png, jpg인경우만 가져온다
-            if(src.split(".")[-1] == "jpg" or src.split(".")[-1] == "png" or src.split(".")[-1] == "jpeg"):
+            if(src.split(".")[-1] == "jpg" or src.split(".")[-1] == "png" or src.split(".")[-1] == "jpeg"):                
                 image_data.append(src)
 
     texts = ""
@@ -64,12 +70,12 @@ async def crawl_coupang(item_name):
         if("q89" in image):
             ## 이미지url을 이미지로 변경후 OCR을 돌려본다
             texts += OCR.ocr(imageurl2img.imageurl2img(image)) + "\n"
-    return await analyze_sentiment(texts)
+    return await analyze_sentiment(texts, detail_image)
 
 
-async def analyze_sentiment(text):
+async def analyze_sentiment(text, detail_image):
     client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
-    eco_keywords = ['친환경인증', '환경인증', '환경표지인증', '녹색건축', '친환경 농산물 인증', '무농약인증']
+    eco_keywords = ['친환경인증', '환경인증', '환경표지인증', '녹색건축', '친환경 농산물 인증', '무농약인증', '무항생제인증', '무항생제 인증', '유기가공식품인증', '유기가공식품 인증', '식품안전관리인증']
 
     """
     주어진 텍스트에서 키워드들의 연관관계와 긍정/부정 정도를 분석합니다.
@@ -82,7 +88,7 @@ async def analyze_sentiment(text):
         # 분석 결과 추출
     )
     sentiment_analysis = response.choices[0].message.content
-    return sentiment_analysis
+    return {"sentiment": sentiment_analysis, "image": detail_image}
 
 # with open("ocr_result.txt", 'w') as f:
 #     f.write(texts)

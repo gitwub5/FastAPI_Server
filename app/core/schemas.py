@@ -48,6 +48,11 @@ class requestItem(BaseModel):
     company: str
     product: str
 
+class ImageSchema(BaseModel):
+    url: Optional[str] = None
+    result_id: Optional[int] = None
+    class Config:
+        orm_mode = True
 
 class KeyWordSchema(BaseModel):
     keyword: Optional[str] = None

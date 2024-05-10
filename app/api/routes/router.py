@@ -114,7 +114,7 @@ async def postItem(item:schemas.requestItem):
     
     data = await get_keywords(company)
     product_results = await crawl_coupang(product)
-    certified_info, esg_info = extract_info(product_results)
+    certified_info, esg_info = extract_info(product_results["sentiment"])
     certified = False
     if certified_info == ['- Yes']:
         certified = True
@@ -130,10 +130,11 @@ async def postItem(item:schemas.requestItem):
     print(post_result)
     post = await service.create_result(db=db, result=post_result)
 
-    print(type(data["keyword"]), type(data["url"]), type(data["title"]))
-
     keyword_get = await service.create_keyword(db=db, result_id=post.id, key_info=data["keyword"])
     print(keyword_get)
+
+    image_get = await service.create_image(db=db, result_id=post.id, image_url=product_results["image"])
+    print(image_get)
 
     article = await service.create_article(db=db, result_id=post.id, urls=data["url"], titles=data["title"])
     print(article)
@@ -142,7 +143,7 @@ async def postItem(item:schemas.requestItem):
     await service.create_esg_info(db=db, result_id=post.id,esg_info=esg_info)
     print(esg_info)
 
-    return db.query(models.Result).options(joinedload(models.Result.articles), joinedload(models.Result.esgs), joinedload(models.Result.keywords)).filter(models.Result.id == post.id).first()
+    return db.query(models.Result).options(joinedload(models.Result.articles), joinedload(models.Result.esgs), joinedload(models.Result.keywords), joinedload(models.Result.images)).filter(models.Result.id == post.id).first()
     
 
 @router.get("/results", response_model=List[schemas.ResultSchema])

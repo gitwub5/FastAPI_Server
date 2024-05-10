@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.api.main import router as api_router
 
-app = FastAPI()
+app = FastAPI(default_response_headers={"Content-Type": "application/json; charset=utf-8"})
 app.include_router(api_router)
 
 app.add_middleware(
