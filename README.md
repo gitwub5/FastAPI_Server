@@ -7,6 +7,8 @@ KHUTHON 2024
 
 ### 서비스 설명: 그린워싱 방법이 교모해져가는 사회에서 녹색 소비, 즉 친환경 소비를 지향하는 소비자를 위한 정보 전달 어플리케이션
 ### 아키텍쳐: Flutter(Frontend) - FastAPI(Backend) - SQlite(Database)
+Frontend: [id]: URL "[https://github.com/cherrie-k/khuthon](https://github.com/cherrie-k/khuthon)"
+Backend: [id]: URL "[https://github.com/cherrie-k/khuthon](https://github.com/gitwub5/FastAPI_Server)"
 ### 문제정의: 그린워싱으로 인해 소비자들이 친환경 제품에 대한 의구심 증가 
 ### 친환경 마케팅 과정에서의 모호한 표현들: 
 **친환경성을 표현하는 키워드가 한 번 이상 포함**되어 있으나 **구체적인 근거가 명시되지 않은** 경우
@@ -14,9 +16,8 @@ KHUTHON 2024
   - ‘구체적인 근거’의 예 : 성분 및 원료 출처, 공정과정, 인증마크 등
   - 기타 : 자연물 이미지가 포함되어 환경친화적인 느낌을 연상시키지만 구체적인 근거가 명시되지 않은 경우 포함
 
-<hr/>
+* * *
 ## FastAPI Server
-
 > 1. /app: 애플리케이션의 주요 코드를 포함합니다.
 > 2. /api: API 엔드포인트를 정의합니다. /router 폴더를 사용할 수 있습니다.
 > 3. /core: 애플리케이션 설정과 같은 핵심 구성요소를 포함합니다.
