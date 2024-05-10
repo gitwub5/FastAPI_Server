@@ -2,7 +2,7 @@ KHUTHON 2024
 =============
 서비스명: HOWGREEN
 -------------
-<img src="https://github.com/gitwub5/FastAPI_Server/assets/132264450/93828431-a71e-4758-9ba5-b6f4b47faa23" width="371px" height="774px"></img><br/>
+<img src="https://github.com/gitwub5/FastAPI_Server/assets/132264450/93828431-a71e-4758-9ba5-b6f4b47faa23" width="371px" height="774px"></img>
 <img src="https://github.com/gitwub5/FastAPI_Server/assets/132264450/69c032ea-43ec-4a6a-9efb-93523820608e" width="371px" height="774px"></img><br/>
 
 ### 서비스 설명: 그린워싱 방법이 교모해져가는 사회에서 녹색 소비, 즉 친환경 소비를 지향하는 소비자를 위한 정보 전달 어플리케이션
