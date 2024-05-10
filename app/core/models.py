@@ -13,33 +13,6 @@ from sqlalchemy.sql.schema import ForeignKey
 from .database import Base
 
 
-#예시
-# class User(Base):
-#     __tablename__ = "users"
-
-#     id = Column(Integer, primary_key=True, index=True)
-#     username = Column(String, unique=True, index=True)
-#     email = Column(String, unique=True, index=True)
-    
-# class Question(Base):
-#     __tablename__ = "question"
-
-#     id = Column(Integer, primary_key=True)
-#     subject = Column(String, nullable=False)
-#     content = Column(Text, nullable=False)
-#     create_date = Column(DateTime, nullable=False)
-
-
-# class Answer(Base):
-#     __tablename__ = "answer"
-
-#     id = Column(Integer, primary_key=True)
-#     content = Column(Text, nullable=False)
-#     create_date = Column(DateTime, nullable=False)
-#     question_id = Column(Integer, ForeignKey("question.id"))
-#     question = relationship("Question", backref="answers")
-
-
 class Result(Base):
     __tablename__="result"
     id = Column(Integer, primary_key=True)
