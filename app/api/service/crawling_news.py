@@ -33,7 +33,7 @@ async def crawling_esgnews_with_keyword(brand):
         search_box = driver.find_element(By.CLASS_NAME, 'Ax4B8.ZAGvjd')
         search_box.click()
         search_box.clear()
-        search_box.send_keys(brand)
+        search_box.send_keys(brand + " ESG")
         search_box.send_keys(Keys.ENTER)
         time.sleep(2)
 
