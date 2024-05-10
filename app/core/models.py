@@ -28,6 +28,7 @@ class Result(Base):
     articles = relationship("Article", back_populates="result")
     esgs = relationship("Esg", back_populates="result")
     keywords = relationship("Keyword", back_populates="result")
+    images = relationship("Image", back_populates="result")
 
 class Article(Base):
     __tablename__="article"
@@ -36,6 +37,13 @@ class Article(Base):
     title = Column(Text)
     result_id = Column(Integer, ForeignKey("result.id"))
     result = relationship("Result", back_populates="articles")
+
+class Image(Base):
+    __tablename__="image"
+    id = Column(Integer, primary_key=True)
+    url = Column(Text)
+    result_id = Column(Integer, ForeignKey("result.id"))
+    result = relationship("Result", back_populates="images")
 
 
 class Esg(Base):

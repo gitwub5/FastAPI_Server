@@ -44,6 +44,16 @@ async def create_keyword(db: Session, result_id: int, key_info: List[str]):
         db_results.append(db_result)
     return db_results
 
+async def create_image(db: Session, result_id: int, image_url: str):
+    db_result = models.Image(
+        result_id=result_id,
+        url=image_url
+    )
+    db.add(db_result)
+    db.commit()
+    db.refresh(db_result)
+    return db_result
+
 
 
 async def create_article(db: Session,result_id: int, urls: List[str], titles: List[str]):
