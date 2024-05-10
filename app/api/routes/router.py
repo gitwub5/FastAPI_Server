@@ -11,6 +11,8 @@ from ...core.database import SessionLocal, engine
 from sqlalchemy.orm import Session, joinedload
 from typing import List
 import time
+from ..service.crawling_news import get_keywords
+import re
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -78,9 +80,9 @@ def extract_info(product_results):
 
         # 현재 섹션에 따라 해당 정보를 적절한 리스트에 추가합니다.
         if current_section == 'certified' and line.strip():
-            certified_info.append(line.strip())
+            certified_info.append(re.sub(r"[^\uAC00-\uD7A30-9a-zA-Z\s]", "", line.strip()))
         elif current_section == 'esg' and line.strip():
-            esg_info.append(line.strip())
+            esg_info.append(re.sub(r"[^\uAC00-\uD7A30-9a-zA-Z\s]", "", line.strip()))
         # '```' 제거하기
     if certified_info and certified_info[-1] == '```':
         certified_info.pop()
@@ -93,10 +95,9 @@ def extract_info(product_results):
 async def postItem(item:schemas.requestItem):
     company = item.company
     product = item.product
-    check = await service.get_result_by_product(db=db,product=product)
-    if check: 
-        time.sleep(10)
-        return check
+    # check = await service.get_result_by_product(db=db,product=product)
+    # if check: 
+    #     return check
     esg_results = await fetch_esg_rating(company)
     esg_dict={}
     if esg_results:
@@ -110,11 +111,14 @@ async def postItem(item:schemas.requestItem):
             "governce": first_result[4],
             "year": first_result[5]  # 문자열 그대로 반환
         }
+    
+    data = await get_keywords(company)
     product_results = await crawl_coupang(product)
     certified_info, esg_info = extract_info(product_results)
     certified = False
     if certified_info == ['- Yes']:
         certified = True
+        
     post_result = schemas.PostResultSchema(
         company=company,
         product=product,
@@ -125,10 +129,20 @@ async def postItem(item:schemas.requestItem):
 
     print(post_result)
     post = await service.create_result(db=db, result=post_result)
-    print(esg_info)
-    await service.create_esg_info(db=db, result_id=post.id,esg_info=esg_info)
 
-    return db.query(models.Result).options(joinedload(models.Result.articles), joinedload(models.Result.esgs)).filter(models.Result.id == post.id).first()
+    print(type(data["keyword"]), type(data["url"]), type(data["title"]))
+
+    keyword_get = await service.create_keyword(db=db, result_id=post.id, key_info=data["keyword"])
+    print(keyword_get)
+
+    article = await service.create_article(db=db, result_id=post.id, urls=data["url"], titles=data["title"])
+    print(article)
+
+
+    await service.create_esg_info(db=db, result_id=post.id,esg_info=esg_info)
+    print(esg_info)
+
+    return db.query(models.Result).options(joinedload(models.Result.articles), joinedload(models.Result.esgs), joinedload(models.Result.keywords)).filter(models.Result.id == post.id).first()
     
 
 @router.get("/results", response_model=List[schemas.ResultSchema])

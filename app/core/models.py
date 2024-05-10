@@ -27,11 +27,13 @@ class Result(Base):
     company = Column(String)
     articles = relationship("Article", back_populates="result")
     esgs = relationship("Esg", back_populates="result")
+    keywords = relationship("Keyword", back_populates="result")
 
 class Article(Base):
     __tablename__="article"
     id = Column(Integer, primary_key=True)
     url = Column(Text)
+    title = Column(Text)
     result_id = Column(Integer, ForeignKey("result.id"))
     result = relationship("Result", back_populates="articles")
 
@@ -43,3 +45,11 @@ class Esg(Base):
     context = Column(Text)
     result_id = Column(Integer, ForeignKey("result.id"))
     result = relationship("Result", back_populates="esgs")
+
+class Keyword(Base):
+    __tablename__="keyword"
+    id = Column(Integer, primary_key=True)
+    keyword = Column(String)
+    result_id = Column(Integer, ForeignKey("result.id"))
+    result = relationship("Result", back_populates="keywords")
+ 
