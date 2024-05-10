@@ -31,17 +31,35 @@ async def create_result(db: Session, result: schemas.PostResultSchema):
     db.refresh(db_result)  # 생성된 ID와 같은 DB의 새 데이터를 포함하도록 새로고침
     return db_result
 
-    
+async def create_keyword(db: Session, result_id: int, key_info: List[str]):
+    db_results = []
+    for keyword in key_info:
+        db_result = models.Keyword(
+            result_id=result_id,
+            keyword=keyword
+        )
+        db.add(db_result)
+        db.commit()
+        db.refresh(db_result)
+        db_results.append(db_result)
+    return db_results
 
-# async def create_esg_info(db: Session, info: schemas.EsgSchema):
-#     db_result = models.Esg(
-#         result_id = info.result_id,
-#         keyword = info.keyword
-#     )
-#     db.add(db_result)
-#     db.commit()
-#     db.refresh(db_result)
-#     return db_result
+
+
+async def create_article(db: Session,result_id: int, urls: List[str], titles: List[str]):
+    db_results = []
+    for url, title in zip(urls, titles):
+        db_result = models.Article(
+            result_id=result_id,
+            url=url,
+            title=title
+        )
+        db.add(db_result)
+        db.commit()
+        db.refresh(db_result)
+        db_results.append(db_result)
+    return db_result  
+
 
 async def create_esg_info(db: Session, result_id: int, esg_info: List[str]):
     db_results = []

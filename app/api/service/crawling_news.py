@@ -16,7 +16,7 @@ load_dotenv()
 
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
-def crawling_esgnews_with_keyword(brand):
+async def crawling_esgnews_with_keyword(brand):
     options = webdriver.ChromeOptions()
     options.add_argument("--headless")  # 브라우저를 표시하지 않고 실행
     options.add_argument("--disable-gpu")  # GPU 사용 안 함
@@ -71,7 +71,7 @@ def check_keyword(title):
                 return True
         return False
 
-def get_article_content(url_list, brand):
+async def get_article_content(url_list, brand):
     options = webdriver.ChromeOptions()
     options.add_argument("--headless")
     options.add_argument("--disable-gpu")
@@ -92,7 +92,7 @@ def get_article_content(url_list, brand):
 
             soup = BeautifulSoup(content_html, 'html.parser')
             text = soup.get_text()
-            text = analyze_proscons(text, brand)
+            text = await analyze_proscons(text, brand)
             content_list.append(text)
 
     except Exception as e:
@@ -103,7 +103,7 @@ def get_article_content(url_list, brand):
         return content_list
 
 
-def analyze_proscons(text, brand):
+async def analyze_proscons(text, brand):
     #주어진 텍스트에서 키워드들의 연관관계와 긍정/부정 정도를 분석합니다.
     
     message = f"'''{text}'''을 요약하여 입력하세요. '{brand}' 기업이 끼치는 ESG 영향 중에 환경 분야에서의 긍정적인 측면과 부정적인 측면으로 나누어 각각 키워드 단위로 설명하시오. 출력 형식은 긍정: ,부정: "
@@ -116,7 +116,7 @@ def analyze_proscons(text, brand):
     proscons_analysis = response.choices[0].message.content
     return proscons_analysis
 
-def get_positive_keywords(reply_list):
+async def get_positive_keywords(reply_list):
     positive_keywords = []
     for text in reply_list:
         positive_start_index = text.find("긍정:") + len("긍정:")
@@ -127,14 +127,16 @@ def get_positive_keywords(reply_list):
     
         # 쉼표로 구분하여 리스트로 변환
         keywords_list = [re.sub(r"[^\uAC00-\uD7A30-9a-zA-Z\s]", "", keyword.strip()) for keyword in content_between.split(',')]
-        positive_keywords = positive_keywords + keywords_list
+        positive_keywords += keywords_list
     
     return positive_keywords
 
-# if __name__ == '__main__':
-#     start = time.time()
-#     news_links, news_titles = crawling_esgnews_with_keyword("슈가버블")
-#     analyse_list = get_article_content(news_links, "슈가버블")
-#     print(get_positive_keywords(analyse_list))
-#     end = time.time()
-#     print(f"{end - start:.5f} sec")
+async def get_keywords(brand):
+    news_links, news_titles = await crawling_esgnews_with_keyword(brand)
+    analyse_list = await get_article_content(news_links, brand)
+    good_keywords = await get_positive_keywords(analyse_list)
+    return {
+        "keyword": good_keywords,
+        "title": news_titles,
+        "url": news_links
+    }

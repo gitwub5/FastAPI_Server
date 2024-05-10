@@ -21,12 +21,14 @@ class ResultSchema(BaseModel):
 
 # Article 모델에 대한 Pydantic 스키마
 class ArticleSchema(BaseModel):
-    id: Optional[int] = None
-    url: str
-    result_id: int
+    url: Optional[str] = None
+    title: Optional[str] = None
+    result_id: Optional[int] = None
 
     class Config:
         orm_mode = True
+
+
 
 class EsgSchema(BaseModel):
     id: Optional[int] = None
@@ -45,6 +47,13 @@ class ArticleWithResultSchema(ArticleSchema):
 class requestItem(BaseModel):
     company: str
     product: str
+
+
+class KeyWordSchema(BaseModel):
+    keyword: Optional[str] = None
+    result_id: Optional[int] = None
+    class Config:
+        orm_mode = True
 
 
 class PostResultSchema(BaseModel):

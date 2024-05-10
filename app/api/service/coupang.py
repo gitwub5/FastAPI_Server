@@ -26,7 +26,7 @@ async def crawl_coupang(item_name):
     url = "https://www.coupang.com/np/search?component=&q="+urllib.parse.quote(item_name)+"&channel=user"
 
     options = webdriver.ChromeOptions()
-    options.add_argument("--headless")  # 브라우저를 표시하지 않고 실행
+    # options.add_argument("--headless")  # 브라우저를 표시하지 않고 실행
     options.add_argument("--disable-gpu")  # GPU 사용 안 함
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
     driver.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {"source": """ Object.defineProperty(navigator, 'webdriver', { get: () => undefined }) """})
