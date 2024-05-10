@@ -7,7 +7,7 @@ KHUTHON 2024
 
 ### 서비스 설명: 그린워싱 방법이 교모해져가는 사회에서 녹색 소비, 즉 친환경 소비를 지향하는 소비자를 위한 정보 전달 어플리케이션
 ### 아키텍쳐: Flutter(Frontend) - FastAPI(Backend) - SQlite(Database)
-Frontend: [id]: URL "[https://github.com/cherrie-k/khuthon](https://github.com/cherrie-k/khuthon)"
+Frontend: [id]: URL "[https://github.com/cherrie-k/khuthon](https://github.com/cherrie-k/khuthon)"    
 Backend: [id]: URL "[https://github.com/cherrie-k/khuthon](https://github.com/gitwub5/FastAPI_Server)"
 ### 문제정의: 그린워싱으로 인해 소비자들이 친환경 제품에 대한 의구심 증가 
 ### 친환경 마케팅 과정에서의 모호한 표현들: 
