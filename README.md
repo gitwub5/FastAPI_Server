@@ -2,8 +2,14 @@ KHUTHON 2024
 =============
 서비스명: HOWGREEN
 -------------
-<img src="https://github.com/gitwub5/FastAPI_Server/assets/132264450/93828431-a71e-4758-9ba5-b6f4b47faa23" width="371px" height="774px"></img>
-<img src="https://github.com/gitwub5/FastAPI_Server/assets/132264450/69c032ea-43ec-4a6a-9efb-93523820608e" width="371px" height="774px"></img><br/>
+<img src="https://github.com/gitwub5/FastAPI_Server/assets/132264450/ab74b02f-f647-4691-95db-818fd00b4b8c" width="235px" height="543px"></img>
+<img src="https://github.com/gitwub5/FastAPI_Server/assets/132264450/8d278dff-a85b-494e-9d41-f22a66d5b778" width="235px" height="543px"></img>
+<img src="https://github.com/gitwub5/FastAPI_Server/assets/132264450/7bba687a-6f43-4e6a-86af-fb57abd27055" width="235px" height="543px"></img>
+<img src="https://github.com/gitwub5/FastAPI_Server/assets/132264450/fdd487ec-3a16-414b-b2a8-0e242ccd11f8" width="235px" height="543px"></img></br>
+<img src="https://github.com/gitwub5/FastAPI_Server/assets/132264450/0cada277-56b1-40ca-b0be-59d3beecb1e3" width="235px" height="543px"></img>
+<img src="https://github.com/gitwub5/FastAPI_Server/assets/132264450/c5d0913e-9c09-44c9-b389-16c6eb8c6966" width="235px" height="543px"></img>
+<img src="https://github.com/gitwub5/FastAPI_Server/assets/132264450/f946cefd-e498-4852-9714-8e7a44c4c55e" width="235px" height="543px"></img>
+<img src="https://github.com/gitwub5/FastAPI_Server/assets/132264450/d4359e20-06b0-4e1a-8792-debeb3e390ee" width="235px" height="543px"></img></br>
 
 ### 서비스 설명: 그린워싱 방법이 교모해져가는 사회에서 녹색 소비, 즉 친환경 소비를 지향하는 소비자를 위한 정보 전달 어플리케이션
 ### 아키텍쳐: Flutter(Frontend) - FastAPI(Backend) - SQlite(Database)
